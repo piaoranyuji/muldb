@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.svc.dao.mgm.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.test.svc.model.mgm.Menu">
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_logo" jdbcType="VARCHAR" property="menuLogo" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_seq" jdbcType="INTEGER" property="menuSeq" />
+    <result column="rec_st" jdbcType="CHAR" property="recSt" />
+    <result column="rec_crt_ts" jdbcType="TIMESTAMP" property="recCrtTs" />
+    <result column="rec_upd_ts" jdbcType="TIMESTAMP" property="recUpdTs" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_name, menu_logo, menu_url, menu_seq, rec_st, rec_crt_ts, rec_upd_ts
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_mgm_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_mgm_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.test.svc.model.mgm.Menu">
+    insert into tbl_mgm_menu (menu_id, menu_name, menu_logo, 
+      menu_url, menu_seq, rec_st, 
+      rec_crt_ts, rec_upd_ts)
+    values (#{menuId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuLogo,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuSeq,jdbcType=INTEGER}, #{recSt,jdbcType=CHAR}, 
+      #{recCrtTs,jdbcType=TIMESTAMP}, #{recUpdTs,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.svc.model.mgm.Menu">
+    insert into tbl_mgm_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuLogo != null">
+        menu_logo,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="menuSeq != null">
+        menu_seq,
+      </if>
+      <if test="recSt != null">
+        rec_st,
+      </if>
+      <if test="recCrtTs != null">
+        rec_crt_ts,
+      </if>
+      <if test="recUpdTs != null">
+        rec_upd_ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLogo != null">
+        #{menuLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSeq != null">
+        #{menuSeq,jdbcType=INTEGER},
+      </if>
+      <if test="recSt != null">
+        #{recSt,jdbcType=CHAR},
+      </if>
+      <if test="recCrtTs != null">
+        #{recCrtTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdTs != null">
+        #{recUpdTs,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.svc.model.mgm.Menu">
+    update tbl_mgm_menu
+    <set>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLogo != null">
+        menu_logo = #{menuLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSeq != null">
+        menu_seq = #{menuSeq,jdbcType=INTEGER},
+      </if>
+      <if test="recSt != null">
+        rec_st = #{recSt,jdbcType=CHAR},
+      </if>
+      <if test="recCrtTs != null">
+        rec_crt_ts = #{recCrtTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recUpdTs != null">
+        rec_upd_ts = #{recUpdTs,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.svc.model.mgm.Menu">
+    update tbl_mgm_menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_logo = #{menuLogo,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_seq = #{menuSeq,jdbcType=INTEGER},
+      rec_st = #{recSt,jdbcType=CHAR},
+      rec_crt_ts = #{recCrtTs,jdbcType=TIMESTAMP},
+      rec_upd_ts = #{recUpdTs,jdbcType=TIMESTAMP}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <select id="selectSelective" parameterType="com.test.svc.model.mgm.Menu" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tbl_mgm_menu
+    where 1 = 1
+    <if test="menuId != null">
+      AND menu_id = #{menuId,jdbcType=INTEGER}
+    </if>
+    <if test="menuName != null">
+      AND menu_name = #{menuName,jdbcType=VARCHAR}
+    </if>
+    <if test="menuLogo != null">
+      AND menu_logo = #{menuLogo,jdbcType=VARCHAR}
+    </if>
+    <if test="menuUrl != null">
+      AND menu_url = #{menuUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="menuSeq != null">
+      AND menu_seq = #{menuSeq,jdbcType=INTEGER}
+    </if>
+    <if test="recSt != null">
+      AND rec_st = #{recSt,jdbcType=CHAR}
+    </if>
+  </select>
+</mapper>
