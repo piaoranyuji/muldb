@@ -24,7 +24,7 @@ public class PropertyUtil {
             // 根据关键字获取value值
             value = prop.getProperty(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("读取配置文件异常", e);
         } finally {
             if (in != null) {
                 try {
