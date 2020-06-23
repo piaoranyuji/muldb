@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
- * @description 刷新内存数据后台入口
+ * 测试入口
  */
 @RestController
 @Slf4j
@@ -58,5 +59,12 @@ public class TestController {
         Menu menu = queryService.getMenu1(menuId);
         log.info("数据库查询菜单详情，应答数据:[{}]", JSON.toJSONString(menu));
         return menu;
+    }
+
+    // 查询全量菜单列表
+    @RequestMapping("/listMenu")
+    public List<Menu> listMenu() {
+
+        return queryService.listMenu();
     }
 }

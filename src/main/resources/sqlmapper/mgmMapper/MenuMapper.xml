@@ -149,4 +149,9 @@
       AND rec_st = #{recSt,jdbcType=CHAR}
     </if>
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tbl_mgm_menu
+  </select>
 </mapper>
