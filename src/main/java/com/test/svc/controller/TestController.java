@@ -61,10 +61,19 @@ public class TestController {
         return menu;
     }
 
-    // 查询全量菜单列表
-    @RequestMapping("/listMenu")
-    public List<Menu> listMenu() {
+    // 查询全量菜单列表（游标查询）
+    @RequestMapping("/listMenuByCursor")
+    public int listMenuByCursor() {
 
-        return queryService.listMenu();
+        List<Menu> menuList = queryService.listMenuByCursor();
+        return menuList.size();
+    }
+
+    // 查询全量菜单列表（普通查询）
+    @RequestMapping("/listMenu")
+    public int listMenu() {
+
+        List<Menu> menuList = queryService.listMenu();
+        return menuList.size();
     }
 }

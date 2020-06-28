@@ -19,5 +19,6 @@ public interface MenuMapper {
 
     List<Menu> selectSelective(Menu menu);
 
+    //    @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = 5)
     List<Menu> selectAll();
 }

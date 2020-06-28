@@ -41,14 +41,21 @@ public class QueryService {
         }
     }
 
-    public List<Menu> listMenu() {
+    /**
+     * 游标查询全量列表
+     *
+     * @return 全部菜单列表
+     */
+    public List<Menu> listMenuByCursor() {
 
+        long start = System.currentTimeMillis();
         List<Menu> menuList = new ArrayList<>();
 
         try {
 
             SqlSessionFactory mgmSqlSessionFactory = (SqlSessionFactory) ApplicationContextHelper.applicationContext.getBean("mgmSqlSessionFactory");
             SqlSession sqlSession = mgmSqlSessionFactory.openSession();
+
             Cursor<Menu> menus = sqlSession.selectCursor("com.test.svc.dao.mgm.MenuMapper.selectAll");
             Iterator iter = menus.iterator();
 
@@ -60,10 +67,34 @@ public class QueryService {
             sqlSession.close();
         } catch (IOException e) {
 
+            log.error("游标查询菜单列表出现异常", e);
+        }
+
+        long end = System.currentTimeMillis();
+        log.info("游标查询菜单条数:[{}]，耗时:[{}]ms", menuList.size(), (end - start));
+        return menuList;
+    }
+
+    /**
+     * 查询全量列表
+     *
+     * @return 全部菜单列表
+     */
+    public List<Menu> listMenu() {
+
+        long start = System.currentTimeMillis();
+        List<Menu> menuList = new ArrayList<>();
+
+        try {
+
+            menuList = menuMapper.selectAll();
+        } catch (Exception e) {
+
             log.error("查询菜单列表出现异常", e);
         }
 
-        log.info("查询到菜单条数:[{}]", menuList.size());
+        long end = System.currentTimeMillis();
+        log.info("查询到菜单条数:[{}]，耗时:[{}]ms", menuList.size(), (end - start));
         return menuList;
     }
 }
